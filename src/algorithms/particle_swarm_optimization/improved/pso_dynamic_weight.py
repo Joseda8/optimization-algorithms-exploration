@@ -1,8 +1,10 @@
 import numpy as np
 
+
 def dynamic_inertia_weight(iteration: int, max_iterations: int, initial_weight: float = 0.9, final_weight: float = 0.4) -> float:
     """
-    Calculate dynamic inertia weight.
+    Calculate dynamic inertia weight using lineal iterpolation.
+    This value decreases as the iterative generation increases.
 
     Parameters:
     - iteration (int): Current iteration.
@@ -37,8 +39,7 @@ def pso_dynamic_weight(objective_function: callable, num_particles: int, num_dim
 
     # Initialize personal best positions and values
     personal_best_positions = particles_position.copy()
-    personal_best_values = np.array(
-        [objective_function(p) for p in personal_best_positions])
+    personal_best_values = np.array([objective_function(p) for p in personal_best_positions])
 
     # Initialize global best position and value
     global_best_index = np.argmin(personal_best_values)
@@ -50,9 +51,10 @@ def pso_dynamic_weight(objective_function: callable, num_particles: int, num_dim
         # Update particle velocities and positions
         inertia_weight = dynamic_inertia_weight(iteration, max_iterations)
 
-        # Cognitive coefficient (individual learning rate)
+        # Cognitive coefficient
         cognitive_coefficient = 1.5
-        social_coefficient = 2.0  # Social coefficient (group learning rate)
+         # Social coefficient
+        social_coefficient = 2.0
 
         # Update velocities
         particles_velocity = (inertia_weight * particles_velocity +
@@ -63,8 +65,7 @@ def pso_dynamic_weight(objective_function: callable, num_particles: int, num_dim
         particles_position += particles_velocity
 
         # Evaluate objective function at new positions
-        current_values = np.array([objective_function(p)
-                                  for p in particles_position])
+        current_values = np.array([objective_function(point) for point in particles_position])
 
         # Update personal best positions and values
         update_personal_best = current_values < personal_best_values
@@ -73,8 +74,7 @@ def pso_dynamic_weight(objective_function: callable, num_particles: int, num_dim
 
         # Update global best position and value
         global_best_index = np.argmin(personal_best_values)
-        global_best_position = personal_best_positions[global_best_index].copy(
-        )
+        global_best_position = personal_best_positions[global_best_index].copy()
         global_best_value = personal_best_values[global_best_index]
 
     return global_best_position, global_best_value

@@ -1,15 +1,14 @@
-import csv
 from .algorithms import pso, pso_dynamic_weight
 from .benchmark_functions import (
     ackley_function,
-    eggholder_function,
+    branin_rcos_function,
+    goldstein_price_function,
     griewank_function,
-    himmelblau_function,
     levy_function,
     michalewicz_function,
     rastrigin_function,
     rosenbrock_function,
-    schwefel_function,
+    six_hump_camelback_function,
     sphere_function
 )
 from .util.logger import setup_logging
@@ -29,10 +28,10 @@ if __name__ == "__main__":
     csv_results = []
 
     # Benchmark functions to test
-    benchmark_functions = [sphere_function, rastrigin_function, ackley_function,
-                           griewank_function, rosenbrock_function, eggholder_function,
-                           michalewicz_function, schwefel_function, levy_function,
-                           himmelblau_function]
+    benchmark_functions = [ackley_function, branin_rcos_function, goldstein_price_function, 
+                           griewank_function, levy_function, michalewicz_function, 
+                           rastrigin_function, rosenbrock_function, six_hump_camelback_function, 
+                           sphere_function]
 
     # Run tests
     for idx, objective_function in enumerate(benchmark_functions, start=1):

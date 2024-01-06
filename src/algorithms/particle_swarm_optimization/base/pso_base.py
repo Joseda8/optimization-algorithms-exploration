@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def pso(objective_function: callable, num_particles: int, num_dimensions: int, max_iterations: int) -> tuple:
     """
     Particle Swarm Optimization (PSO) algorithm.
@@ -29,12 +30,13 @@ def pso(objective_function: callable, num_particles: int, num_dimensions: int, m
     global_best_value = personal_best_values[global_best_index]
 
     # PSO main loop
-    for iteration in range(max_iterations):
-        # Update particle velocities and positions
-        inertia_weight = 0.5  # Inertia weight to balance exploration and exploitation
-        # Cognitive coefficient (individual learning rate)
+    for _ in range(max_iterations):
+        # Inertia weight to balance exploration and exploitation
+        inertia_weight = 0.5 
+        # Cognitive coefficient
         cognitive_coefficient = 1.5
-        social_coefficient = 2.0  # Social coefficient (group learning rate)
+         # Social coefficient
+        social_coefficient = 2.0
 
         # Update velocities
         particles_velocity = (inertia_weight * particles_velocity +
@@ -45,7 +47,7 @@ def pso(objective_function: callable, num_particles: int, num_dimensions: int, m
         particles_position += particles_velocity
 
         # Evaluate objective function at new positions
-        current_values = np.array([objective_function(p) for p in particles_position])
+        current_values = np.array([objective_function(point) for point in particles_position])
 
         # Update personal best positions and values
         update_personal_best = current_values < personal_best_values

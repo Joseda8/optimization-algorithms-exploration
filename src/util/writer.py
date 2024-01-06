@@ -2,9 +2,11 @@ from typing import List
 import csv
 import os
 
+
 def write_to_csv(file_path: str, header: List[str], data: List):
     """
     Write data to a CSV file.
+    It will create the folder structure if it does not exist previously.
 
     Parameters:
     - file_path (str): The path to the CSV file.
