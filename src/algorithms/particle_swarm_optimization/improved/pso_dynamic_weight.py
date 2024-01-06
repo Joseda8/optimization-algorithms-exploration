@@ -3,7 +3,7 @@ import numpy as np
 
 def dynamic_inertia_weight(iteration: int, max_iterations: int, initial_weight: float = 0.0, final_weight: float = 0.5) -> float:
     """
-    Calculate dynamic inertia weight using lineal iterpolation.
+    Calculate dynamic inertia weight using linear interpolation.
     This value decreases as the iterative generation increases.
 
     Parameters:
