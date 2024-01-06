@@ -20,9 +20,9 @@ logger = setup_logging(level="INFO")
 
 if __name__ == "__main__":
     # Declare PSO constants
-    num_particles = 20
+    num_particles = 100
     num_dimensions = 3
-    max_iterations = 50
+    max_iterations = 200
 
     # Results to write in a CSV file
     csv_results = []

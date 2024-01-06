@@ -15,14 +15,14 @@ def pso(objective_function: callable, num_particles: int, num_dimensions: int, m
     - tuple: Best solution found (numpy.ndarray) and its corresponding objective value (float).
     """
     # Initialize particles randomly in the search space
-    particles_position = np.random.rand(num_particles, num_dimensions)
+    particles_position = np.random.rand(num_particles, num_dimensions) * 5
 
     # Initialize particle velocities
-    particles_velocity = np.random.rand(num_particles, num_dimensions)
+    particles_velocity = np.random.rand(num_particles, num_dimensions) * 0.1
 
     # Initialize personal best positions and values
     personal_best_positions = particles_position.copy()
-    personal_best_values = np.array([objective_function(p) for p in personal_best_positions])
+    personal_best_values = np.array([objective_function(point) for point in personal_best_positions])
 
     # Initialize global best position and value
     global_best_index = np.argmin(personal_best_values)
